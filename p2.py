@@ -1,25 +1,25 @@
 import numpy as np
 import pandas as pd
-data = pd.read_csv('2.csv')#, na_values='', skiprows=3)
-con = np.array(data.iloc[:,0:-1])
-tar = np.array(data.iloc[:,-1])
+data = pd.read_csv('2.csv')
+con = np.array(data.iloc[:,:-1]) # without yes/no
+tar = np.array(data.iloc[:,-1]) # YES/NO
 def learn(con,tar):
-    sh = con[0].copy()
+    sh = con[0]
     print("Initialization of specific hypothesis and general hypothesis")
     print(sh)
-    gh = [["?"for i in range(len(sh))] for i in range(len(sh))] 
+    gh = [["?" for i in range(len(sh))] for i in range(len(sh))]
     print(gh)
     for i,h in enumerate(con):
         if tar[i] == "YES":
             for x in range(len(sh)):
                 if h[x] != sh[x]:
-                    sh[x] = gh[x][x] = '?'
+                    gh[x][x] = sh[x] = '?'
         if tar[i] == "NO":
             for x in range(len(sh)):
                 if h[x] != sh[x]:
                     gh[x][x] = sh[x]
-		else:
-		    gh[x][x] = '?'
+        else:
+            gh[x][x] = '?'
         print("steps of candidate eliminate algorithm",i+1)
         print(sh)
         print(gh)

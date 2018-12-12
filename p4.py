@@ -1,6 +1,5 @@
 from math import exp
-from random import random
-from random import seed
+from random import random, seed
 def initialize_nw(ip, hid, op):
     nw = list()
     hl = [{'wt':[random() for i in range(ip + 1)]} for i in range(hid)]
